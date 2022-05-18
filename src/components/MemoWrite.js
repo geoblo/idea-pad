@@ -3,8 +3,14 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import { darken } from 'polished';
 
 import { changeMode, selectMode, write } from '../features/memo/memoSlice';
+import { useGetHeadlineNewsQuery } from '../services/news';
+
+import { 
+  FaRegNewspaper as NewsIcon
+} from "react-icons/fa";
 
 const MemoWriteWrapper = styled.div`
   height: 100vh;
@@ -37,11 +43,22 @@ const DescTextarea = styled.textarea`
   font-weight: 300;
   font-size: 1.1rem;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 0.5rem;
 
   ::placeholder {
     color: white;
     opacity: 1;
+  }
+`;
+
+const StyledNewsIcon = styled(NewsIcon)`
+  font-size: 1.25rem;
+  color: ${props => props.theme.button};
+  cursor: pointer;
+
+  &:hover {
+    color: ${props => darken(0.2, props.theme.button)};
   }
 `;
 
@@ -54,6 +71,14 @@ function MemoWrite(props) {
     title: '',
     desc: ''
   });
+
+  // TO-DO: 뉴스 컴포넌트 만들면 그 안으로 이동 필요
+  const { data, error, isLoading } = useGetHeadlineNewsQuery();
+  useEffect(() => {
+    console.log(data);
+    console.log(error);
+    console.log(isLoading);
+  }, [data, error, isLoading]);
 
   useEffect(() => {
     dispatch(changeMode('WRITE'));
@@ -88,6 +113,10 @@ function MemoWrite(props) {
     }
   }, [dispatch, mode, form, handleClearForm, navigate]);
 
+  const handleGetNews = useCallback(() => {
+    // 새로운 '뉴스' 컴포넌트를 show?
+  }, []);
+
   return (
     <MemoWriteWrapper>
       <TitleInput
@@ -103,6 +132,9 @@ function MemoWrite(props) {
         placeholder="내용 입력"
         onChange={handleChangeForm}
       />
+      <div style={{ textAlign: 'right' }}>
+        <StyledNewsIcon onClick={handleGetNews} />
+      </div>
     </MemoWriteWrapper>
   );
 }

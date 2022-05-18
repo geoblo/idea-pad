@@ -6,7 +6,10 @@ import { darken } from "polished";
 
 import { changeMode, getMemoById, modify, remove, selectAll } from '../features/memo/memoSlice';
 
-import { FaRegTrashAlt as TrashIcon } from "react-icons/fa";
+import { 
+  FaRegTrashAlt as TrashIcon,
+  FaRegNewspaper as NewsIcon
+} from "react-icons/fa";
 
 const MemoDetailWrapper = styled.div`
   height: 100vh;
