@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 
-import { fixed, changeMode, fetchMemo, getMemo } from "../features/memo/memoSlice";
+import { fixed, changeMode, getMemo } from "../features/memo/memoSlice";
 
 import { BsPinFill as PinIcon } from "react-icons/bs";
 import { Link } from 'react-router-dom';
