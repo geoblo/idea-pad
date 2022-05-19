@@ -38,7 +38,7 @@ function NewsList({ handleHideNews, setForm }) {
   const handleClipNews = useCallback((title, url) => {
     setForm(form => ({
       ...form,
-      desc: `${form.desc}[${title}]: ${url}`
+      desc: `${form.desc}[${title.substr(0, 20)}]: ${url}`
     }));
 
     handleHideNews();

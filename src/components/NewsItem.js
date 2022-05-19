@@ -28,6 +28,8 @@ const NewsItemWrapper = styled.div`
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      cursor: pointer;
+
       a {
         color: white;
       }
@@ -60,7 +62,7 @@ function NewsItem({ article: { title, description, url, urlToImage }, handleClip
         </div>
       }
       <div className="contents">
-        <h2>
+        <h2 onClick={() => handleClipNews(title, url)}>
           {title}
         </h2>
         <p>{description}</p>
