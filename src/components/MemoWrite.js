@@ -6,14 +6,14 @@ import { v4 as uuidv4 } from 'uuid';
 import { darken } from 'polished';
 
 import { changeMode, selectMode, write } from '../features/memo/memoSlice';
-import { useGetHeadlineNewsQuery } from '../services/news';
+import NewsList from './NewsList';
 
 import { 
   FaRegNewspaper as NewsIcon
 } from "react-icons/fa";
 
 const MemoWriteWrapper = styled.div`
-  height: 100vh;
+  /* height: 100vh; */
   padding: 1.5rem;
 `;
 
@@ -71,14 +71,7 @@ function MemoWrite(props) {
     title: '',
     desc: ''
   });
-
-  // TO-DO: 뉴스 컴포넌트 만들면 그 안으로 이동 필요
-  const { data, error, isLoading } = useGetHeadlineNewsQuery();
-  useEffect(() => {
-    console.log(data);
-    console.log(error);
-    console.log(isLoading);
-  }, [data, error, isLoading]);
+  const [showNews, setShowNews] = useState(false);
 
   useEffect(() => {
     dispatch(changeMode('WRITE'));
@@ -113,29 +106,41 @@ function MemoWrite(props) {
     }
   }, [dispatch, mode, form, handleClearForm, navigate]);
 
-  const handleGetNews = useCallback(() => {
-    // 새로운 '뉴스' 컴포넌트를 show?
+  const handleShowNews = useCallback(() => {
+    setShowNews(true);
+  }, []);
+
+  const handleHideNews = useCallback(() => {
+    setShowNews(false);
   }, []);
 
   return (
-    <MemoWriteWrapper>
-      <TitleInput
-        name="title"
-        value={form.title || ''}
-        placeholder="제목 입력"
-        onChange={handleChangeForm}
-      />
-      <DescTextarea
-        name="desc"
-        rows={25}
-        value={form.desc || ''}
-        placeholder="내용 입력"
-        onChange={handleChangeForm}
-      />
-      <div style={{ textAlign: 'right' }}>
-        <StyledNewsIcon onClick={handleGetNews} />
-      </div>
-    </MemoWriteWrapper>
+    <div style={{ position: "relative" }}>
+      {showNews && 
+        <NewsList
+          handleHideNews={handleHideNews}
+          setForm={setForm}
+        />
+      }
+      <MemoWriteWrapper>
+        <TitleInput
+          name="title"
+          value={form.title || ''}
+          placeholder="제목 입력"
+          onChange={handleChangeForm}
+        />
+        <DescTextarea
+          name="desc"
+          rows={25}
+          value={form.desc || ''}
+          placeholder="내용 입력"
+          onChange={handleChangeForm}
+        />
+        <div style={{ textAlign: 'right' }}>
+          <StyledNewsIcon onClick={handleShowNews} />
+        </div>
+      </MemoWriteWrapper>
+    </div>
   );
 }
 

@@ -10,6 +10,7 @@ import {
   FaRegTrashAlt as TrashIcon,
   FaRegNewspaper as NewsIcon
 } from "react-icons/fa";
+import NewsList from './NewsList';
 
 const MemoDetailWrapper = styled.div`
   height: 100vh;
@@ -55,6 +56,17 @@ const StyledTrashIcon = styled(TrashIcon)`
   font-size: 1.25rem;
   color: ${props => props.theme.button};
   cursor: pointer;
+  margin-left: 2rem;
+
+  &:hover {
+    color: ${props => darken(0.2, props.theme.button)};
+  }
+`;
+
+const StyledNewsIcon = styled(NewsIcon)`
+  font-size: 1.25rem;
+  color: ${props => props.theme.button};
+  cursor: pointer;
 
   &:hover {
     color: ${props => darken(0.2, props.theme.button)};
@@ -71,6 +83,7 @@ function MemoDetail(props) {
     title: '',
     desc: ''
   });
+  const [showNews, setShowNews] = useState(false);
 
   useEffect(() => {
     dispatch(changeMode('MODIFY'));
@@ -122,25 +135,42 @@ function MemoDetail(props) {
     navigate('/', { replace: true });
   }, [dispatch, memoDetail.id, navigate]);
 
+  const handleShowNews = useCallback(() => {
+    setShowNews(true);
+  }, []);
+
+  const handleHideNews = useCallback(() => {
+    setShowNews(false);
+  }, []);
+
   return (
-    <MemoDetailWrapper>
-      <TitleInput
-        name="title"
-        value={form.title || ''}
-        placeholder="제목 입력"
-        onChange={handleChangeForm}
-      />
-      <DescTextarea
-        name="desc"
-        rows={25}
-        value={form.desc || ''}
-        placeholder="내용 입력"
-        onChange={handleChangeForm}
-      />
-      <div style={{ textAlign: 'right' }}>
-        <StyledTrashIcon onClick={handleRemove} />
-      </div>
-    </MemoDetailWrapper>
+    <div style={{ position: "relative" }}>
+      {showNews && 
+        <NewsList
+          handleHideNews={handleHideNews}
+          setForm={setForm}
+        />
+      }
+      <MemoDetailWrapper>
+        <TitleInput
+          name="title"
+          value={form.title || ''}
+          placeholder="제목 입력"
+          onChange={handleChangeForm}
+        />
+        <DescTextarea
+          name="desc"
+          rows={25}
+          value={form.desc || ''}
+          placeholder="내용 입력"
+          onChange={handleChangeForm}
+        />
+        <div style={{ textAlign: 'right' }}>
+          <StyledNewsIcon onClick={handleShowNews} />
+          <StyledTrashIcon onClick={handleRemove} />
+        </div>
+      </MemoDetailWrapper>
+    </div>
   );
 }
 

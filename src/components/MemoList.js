@@ -42,6 +42,13 @@ const MemoBox = styled.div`
   font-size: 12px;
   cursor: pointer;
 
+  span {
+    width: 120px;
+    height: 60px;
+    display: inline-block;
+    overflow: hidden;
+  }
+
   &:hover {
     border: 2px solid pink;
   }
