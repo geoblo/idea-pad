@@ -38,12 +38,13 @@ function NewsList({ handleHideNews, setForm }) {
   const handleClipNews = useCallback((title, url) => {
     setForm(form => ({
       ...form,
-      desc: `${form.desc}[${title.substr(0, 20)}]: ${url}`
+      desc: `${form.desc}[${title.substr(0, 20)}...]: ${url}`
     }));
 
     handleHideNews();
   }, [setForm, handleHideNews]);
 
+  // TO-DO: 검색창 만들어서 뉴스 검색 기능!
 
   if (isLoading) return <NewsListWrapper>뉴스 불러 오는 중...</NewsListWrapper>;
 
