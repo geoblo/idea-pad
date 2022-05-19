@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import reset from 'styled-reset';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import MemoTemplate from './components/MemoTemplate';
 import MemoWrite from './components/MemoWrite';
@@ -52,6 +54,18 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer
+        theme="dark"
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+      />
     </ThemeProvider>
   );
 }

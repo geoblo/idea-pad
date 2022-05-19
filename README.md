@@ -13,12 +13,17 @@ In this project, I used useful modules below :
 
 #### `react-router-dom`
 
-### Style
+### Style (CSS in JS)
 
 #### `styled-reset`
 #### `styled-component`
 #### `classnames`
+
+### UI/UX, Animation
+
 #### `react-icons`
+#### `animate.css`
+#### `react-toastify`
 
 ### Global State Management
 

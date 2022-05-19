@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import { darken } from 'polished';
+import { toast } from 'react-toastify';
 
 import { changeMode, selectMode, write } from '../features/memo/memoSlice';
 import NewsList from './NewsList';
@@ -19,7 +20,10 @@ const MemoWriteWrapper = styled.div`
 
 const TitleInput = styled.input`
   width: 100%;
-  border: none;
+  border: ${props => props.validate ? 'none' : '2px solid'};
+  border-color: ${props => props.validate ? undefined : '#ed5858'};
+  box-shadow: ${props => props.validate ? undefined : 'inset 0 0 0 2px #ed5858'};
+  transition: border-color .5s ease-in-out, box-shadow .5s ease-in-out;
   outline: none;
   font-weight: 500;
   font-size: 1.25rem;
@@ -35,7 +39,10 @@ const TitleInput = styled.input`
 
 const DescTextarea = styled.textarea`
   width: 100%;
-  border: none;
+  border: ${props => props.validate ? 'none' : '2px solid'};
+  border-color: ${props => props.validate ? undefined : '#ed5858'};
+  box-shadow: ${props => props.validate ? undefined : 'inset 0 0 0 2px #ed5858'};
+  transition: border-color .25s ease-in-out, box-shadow .25s ease-in-out;
   outline: none;
   resize: none;
   background: ${props => props.theme.memoBg};
@@ -72,6 +79,10 @@ function MemoWrite(props) {
     desc: ''
   });
   const [showNews, setShowNews] = useState(false);
+  const [validate, setValidate] = useState({
+    title: true,
+    desc: true
+  });
 
   useEffect(() => {
     dispatch(changeMode('WRITE'));
@@ -82,6 +93,18 @@ function MemoWrite(props) {
       ...form,
       [e.target.name]: e.target.value
     }));
+
+    if (e.target.value) {
+      setValidate(validate => ({
+        ...validate,
+        [e.target.name]: true
+      }));
+    } else {
+      setValidate(validate => ({
+        ...validate,
+        [e.target.name]: false
+      }));
+    }
   }, []);
 
   const handleClearForm = useCallback(e => {
@@ -93,6 +116,25 @@ function MemoWrite(props) {
 
   useEffect(() => {
     if (mode === 'SAVE') {
+      if (!form.title) {
+        setValidate(validate => ({
+          ...validate,
+          title: false
+        }));
+        toast.error('제목을 입력하세요!');
+        dispatch(changeMode('WRITE'));
+        return;
+      }
+      if (!form.desc) {
+        setValidate(validate => ({
+          ...validate,
+          desc: false
+        }));
+        toast.error('내용을 입력하세요!');
+        dispatch(changeMode('WRITE'));
+        return;
+      }
+
       const newMemo = {
         id: uuidv4(),
         title: form.title,
@@ -127,6 +169,7 @@ function MemoWrite(props) {
           name="title"
           value={form.title || ''}
           placeholder="제목 입력"
+          validate={validate.title}
           onChange={handleChangeForm}
         />
         <DescTextarea
@@ -134,6 +177,7 @@ function MemoWrite(props) {
           rows={25}
           value={form.desc || ''}
           placeholder="내용 입력"
+          validate={validate.desc}
           onChange={handleChangeForm}
         />
         <div style={{ textAlign: 'right' }}>
