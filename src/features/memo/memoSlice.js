@@ -1,17 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-// export const getNewsByKeyword = createAsyncThunk(
-//   'memo/getNewsByKeyword',
-//   async (keyword, { rejectWithValue }) => {
-//     try {
-//       const response = await useGetNewsByKeywordQuery(keyword);
-//     } catch (err) {
-//       console.log(rejectWithValue(err.response.data));
-//     }
-//     // return response.data;
-//   }
-// );
-
 /**
  * mode: ['LIST': 메모 목록, 'WRITE': 메모 작성, 'SAVE': 메모 저장중, 'MODIFY': 메모 수정]
  */
@@ -59,11 +47,6 @@ export const memoSlice = createSlice({
       state.memoDetail = memo;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase(getNewsByKeyword.fulfilled, (state, action) => {
-  //     console.log('reducer');
-  //   })
-  // },
 });
 
 export const { write, modify, fixed, remove, changeMode, getMemo, getMemoById } = memoSlice.actions;
