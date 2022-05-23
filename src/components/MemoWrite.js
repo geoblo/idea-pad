@@ -70,6 +70,8 @@ const StyledNewsIcon = styled(NewsIcon)`
 `;
 
 function MemoWrite(props) {
+  // const { data, error, isLoading } = useGetHeadlineNewsQuery();
+
   const mode = useSelector(selectMode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -158,12 +160,20 @@ function MemoWrite(props) {
 
   return (
     <div style={{ position: "relative" }}>
-      {showNews && 
+      {/* {showNews && search ? ( */}
+      {showNews &&
         <NewsList
+          // headlineData={data}
           handleHideNews={handleHideNews}
           setForm={setForm}
         />
       }
+      {/* ) : ( */}
+        {/* <NewsList
+          handleHideNews={handleHideNews}
+          setForm={setForm}
+        /> */}
+      {/* )} */}
       <MemoWriteWrapper>
         <TitleInput
           name="title"

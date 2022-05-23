@@ -1,10 +1,13 @@
 import { createSlice, current } from "@reduxjs/toolkit";
 
-// export const fetchMemo = createAsyncThunk(
-//   'memo/fetchMemo',
-//   async () => {
-//     const response = await localStorage.getItem('memoList');
-//     console.log(response);
+// export const getNewsByKeyword = createAsyncThunk(
+//   'memo/getNewsByKeyword',
+//   async (keyword, { rejectWithValue }) => {
+//     try {
+//       const response = await useGetNewsByKeywordQuery(keyword);
+//     } catch (err) {
+//       console.log(rejectWithValue(err.response.data));
+//     }
 //     // return response.data;
 //   }
 // );
@@ -56,11 +59,11 @@ export const memoSlice = createSlice({
       state.memoDetail = memo;
     },
   },
-  // extraReducers: {
-  //   [fetchMemo.fulfilled]: (state, action) => {
-  //     state.memoList.push(action.payload);
-  //   },
-  // }
+  // extraReducers: (builder) => {
+  //   builder.addCase(getNewsByKeyword.fulfilled, (state, action) => {
+  //     console.log('reducer');
+  //   })
+  // },
 });
 
 export const { write, modify, fixed, remove, changeMode, getMemo, getMemoById } = memoSlice.actions;

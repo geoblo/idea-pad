@@ -7,7 +7,10 @@ export const newsApi = createApi({
     getHeadlineNews: builder.query({
       query: () => `top-headlines?country=kr&apiKey=1076b488e7a642b6b1f9950f13d28644`,
     }),
+    getNewsByKeyword: builder.query({
+      query: (keyword) => `everything?apiKey=1076b488e7a642b6b1f9950f13d28644&q=${keyword}&sortBy=popularity`,
+    }),
   }),
 });
 
-export const { useGetHeadlineNewsQuery } = newsApi;
+export const { useGetHeadlineNewsQuery, useGetNewsByKeywordQuery } = newsApi;

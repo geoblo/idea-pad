@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import styled from 'styled-components';
+import { darken } from 'polished';
+
+import NewsItem from './NewsItem';
+import { useGetNewsByKeywordQuery } from '../services/news';
 
 import { AiOutlineCloseCircle as CloseIcon } from "react-icons/ai";
-import { darken } from 'polished';
-import { useGetHeadlineNewsQuery } from '../services/news';
-import NewsItem from './NewsItem';
 
 const NewsListWrapper = styled.div`
   width: 100%;
@@ -26,14 +27,25 @@ const StyledCloseIcon = styled(CloseIcon)`
   }
 `;
 
-function NewsList({ handleHideNews, setForm }) {
-  const { data, error, isLoading } = useGetHeadlineNewsQuery();
-  
-  useEffect(() => {
-    console.log(data);
-    console.log(error);
-    console.log(isLoading);
-  }, [data, error, isLoading]);
+const SearchInput = styled.input`
+  width: 100%;
+  border: none;
+  outline: none;
+  font-weight: 500;
+  font-size: 1.25rem;
+  background: ${props => props.theme.memoBg};
+  color: white;
+  padding: 0.5rem;
+
+  ::placeholder {
+    color: white;
+    opacity: 1;
+  }
+`;
+
+function NewsList({ headlineData, handleHideNews, setForm }) {
+  const [search, setSearch] = useState('주요');
+  const { data, error , isLoading } = useGetNewsByKeywordQuery(search);
 
   const handleClipNews = useCallback((title, url) => {
     setForm(form => ({
@@ -44,24 +56,45 @@ function NewsList({ handleHideNews, setForm }) {
     handleHideNews();
   }, [setForm, handleHideNews]);
 
-  // TO-DO: 검색창 만들어서 뉴스 검색 기능!
+  // const handleChangeSearch = useCallback(e => {
+    
+  // }, []);
 
-  if (isLoading) return <NewsListWrapper>뉴스 불러 오는 중...</NewsListWrapper>;
+  const handleSearch = useCallback(e => {
+    if (e.key === 'Enter') {
+      setSearch(e.target.value);
+    }
+  }, []);
 
   return (
     <NewsListWrapper className='animate__animated animate__slideInUp custom-scroll'>
-      <div style={{ textAlign: 'right' }}>
-        <StyledCloseIcon onClick={handleHideNews} />
-      </div>
-      {data.articles.map(article => (
-        <NewsItem 
-          key={article.url}
-          article={article}
-          handleClipNews={handleClipNews}
-        />
-      ))}
+      {error ? (
+        <>오류가 발생, 잠시 후 다시 시도해주세요.</>
+      ) : isLoading ? (
+        <>뉴스 불러 오는 중...</>
+      ) : data ? (
+        <>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', columnGap: '1rem' }}>
+            <SearchInput
+              name="search"
+              defaultValue={search || ''}
+              placeholder="제목 입력"
+              // onChange={handleChangeSearch}
+              onKeyUp={handleSearch}
+            />
+            <StyledCloseIcon onClick={handleHideNews} />
+          </div>
+          {data.articles.map(article => (
+            <NewsItem 
+              key={article.url}
+              article={article}
+              handleClipNews={handleClipNews}
+            />
+          ))}
+        </>
+      ) : null}
     </NewsListWrapper>
   );
 }
 
-export default NewsList;
+export default React.memo(NewsList);

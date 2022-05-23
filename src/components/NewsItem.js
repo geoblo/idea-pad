@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const NewsItemWrapper = styled.div`
   display: flex;
-  margin-top: .5rem;
+  margin-top: 1.25rem;
   width: 100%;
   max-height: 100px;
   overflow: hidden;
@@ -22,7 +22,7 @@ const NewsItemWrapper = styled.div`
 
   .contents {
     width: 300px;
-    
+
     h2 {
       margin: 0;
       white-space: nowrap;
@@ -49,7 +49,7 @@ const NewsItemWrapper = styled.div`
   }
 
   & + & {
-    margin-top: 3rem;
+    margin-top: 1rem;
   }
 `;
 
@@ -74,4 +74,4 @@ function NewsItem({ article: { title, description, url, urlToImage }, handleClip
   );
 }
 
-export default NewsItem;
+export default React.memo(NewsItem);
