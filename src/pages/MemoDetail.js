@@ -12,7 +12,7 @@ import {
   FaRegNewspaper as NewsIcon
 } from "react-icons/fa";
 import NewsList from './NewsList';
-import Modal from './common/Modal';
+import Modal from '../components/Modal';
 
 const MemoDetailWrapper = styled.div`
   /* height: 100vh; */

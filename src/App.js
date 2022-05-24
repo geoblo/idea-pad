@@ -4,10 +4,10 @@ import reset from 'styled-reset';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import MemoTemplate from './components/MemoTemplate';
-import MemoWrite from './components/MemoWrite';
-import MemoList from './components/MemoList';
-import MemoDetail from './components/MemoDetail';
+import MemoTemplate from './pages/MemoTemplate';
+import MemoWrite from './pages/MemoWrite';
+import MemoList from './pages/MemoList';
+import MemoDetail from './pages/MemoDetail';
 
 const theme = {
   memoBg: "#555555",
