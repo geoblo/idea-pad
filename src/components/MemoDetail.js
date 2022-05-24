@@ -12,6 +12,7 @@ import {
   FaRegNewspaper as NewsIcon
 } from "react-icons/fa";
 import NewsList from './NewsList';
+import Modal from './common/Modal';
 
 const MemoDetailWrapper = styled.div`
   /* height: 100vh; */
@@ -90,6 +91,7 @@ function MemoDetail(props) {
     title: '',
     desc: ''
   });
+  const [showModal, setShowModal] = useState(false);
   const [showNews, setShowNews] = useState(false);
   const [validate, setValidate] = useState({
     title: true,
@@ -172,10 +174,17 @@ function MemoDetail(props) {
   }, [dispatch, form, handleClearForm, memoDetail, mode, navigate]);
 
   const handleRemove = useCallback(() => {
-    // TO-DO: 추후 삭제 확인 모달 하나 추가 필요
     dispatch(remove(memoDetail.id));
     navigate('/', { replace: true });
   }, [dispatch, memoDetail.id, navigate]);
+
+  const handleOpenModal = useCallback(() => {
+    setShowModal(true);
+  }, []);
+
+  const handleCloseModal = useCallback(() => {
+    setShowModal(false);
+  }, []);
 
   const handleShowNews = useCallback(() => {
     setShowNews(true);
@@ -193,6 +202,17 @@ function MemoDetail(props) {
           setForm={setForm}
         />
       }
+      <Modal
+        title="경고"
+        size="small"
+        cancelText="취소"
+        confirmText="삭제"
+        onCancel={handleCloseModal}
+        onConfirm={handleRemove}
+        visible={showModal}
+      >
+        삭제하시겠습니까?
+      </Modal>
       <MemoDetailWrapper>
         <TitleInput
           name="title"
@@ -211,7 +231,7 @@ function MemoDetail(props) {
         />
         <div style={{ textAlign: 'right' }}>
           <StyledNewsIcon onClick={handleShowNews} />
-          <StyledTrashIcon onClick={handleRemove} />
+          <StyledTrashIcon onClick={handleOpenModal} />
         </div>
       </MemoDetailWrapper>
     </div>

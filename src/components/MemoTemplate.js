@@ -7,11 +7,20 @@ import MemoHeader from './MemoHeader';
 import MemoFooter from './MemoFooter';
 import { selectMemoCount } from './../features/memo/memoSlice';
 
+const CenterBox = styled.div`
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const MemoTemplateWrapper = styled.div`
   width: 512px;
   height: 768px;
   margin: 0 auto;
-  margin-top: 3rem;
+  /* margin-top: 3rem; */
   background: #222222;
   border-radius: 6px;
 
@@ -23,11 +32,13 @@ function MemoTemplate() {
   const memoCnt = useSelector(selectMemoCount);
 
   return (
-    <MemoTemplateWrapper>
-      <MemoHeader />
-      {<Outlet />}
-      <MemoFooter count={memoCnt} />
-    </MemoTemplateWrapper>
+    <CenterBox>
+      <MemoTemplateWrapper>
+        <MemoHeader />
+        {<Outlet />}
+        <MemoFooter count={memoCnt} />
+      </MemoTemplateWrapper>
+    </CenterBox>
   );
 }
 
