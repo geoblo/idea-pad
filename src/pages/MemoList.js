@@ -87,7 +87,7 @@ function MemoList() {
     <MemoListWrapper className='custom-scroll'>
       <p style={{ marginBottom: '0.5rem' }}>고정된 메모</p>
       <FixedMemoContainer>
-        {memos.filter(memo => memo.fixed === true).map(memo =>
+        {memos && memos.filter(memo => memo.fixed === true).map(memo =>
           <StyledLink key={memo.id} to={`/detail/${memo.id}`}>
             <MemoBox>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -102,7 +102,7 @@ function MemoList() {
       </FixedMemoContainer>
       <p style={{ marginBottom: '0.5rem' }}>메모</p>
       <MemoContainer>
-        {memos.filter(memo => memo.fixed === false).map(memo => 
+        {memos && memos.filter(memo => memo.fixed === false).map(memo => 
           <StyledLink key={memo.id} to={`/detail/${memo.id}`}>
             <MemoBox>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
