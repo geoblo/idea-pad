@@ -69,7 +69,10 @@ function NewsList({ headlineData, handleHideNews, setForm }) {
   return (
     <NewsListWrapper className='animate__animated animate__slideInUp custom-scroll'>
       {error ? (
-        <>오류가 발생, 잠시 후 다시 시도해주세요.</>
+        <>
+          오류가 발생, 잠시 후 다시 시도해주세요.
+          <StyledCloseIcon onClick={handleHideNews} />
+        </>
       ) : isLoading ? (
         <>뉴스 불러 오는 중...</>
       ) : data ? (
