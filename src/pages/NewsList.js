@@ -70,7 +70,7 @@ function NewsList({ headlineData, handleHideNews, setForm }) {
     <NewsListWrapper className='animate__animated animate__slideInUp custom-scroll'>
       {error ? (
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          오류가 발생, 잠시 후 다시 시도해주세요.
+          <span>오류가 발생, 잠시 후 다시 시도해주세요.</span>
           <StyledCloseIcon onClick={handleHideNews} />
         </div>
       ) : isLoading ? (
