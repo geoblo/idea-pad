@@ -38,7 +38,7 @@ export const memoSlice = createSlice({
     },
     getMemo: (state, action) => {
       const response = localStorage.getItem('memoList');
-      state.memoList = JSON.parse(response);
+      state.memoList = JSON.parse(response) || [];
     },
     getMemoById: (state, { payload: id }) => {
       const response = localStorage.getItem('memoList');
