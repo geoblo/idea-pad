@@ -48,9 +48,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<MemoTemplate />}>
-            <Route path="/" element={<MemoList />} />
-            <Route path="/write" element={<MemoWrite />} />
-            <Route path="/detail/:id" element={<MemoDetail />} />
+            <Route path="/idea-pad/" element={<MemoList />} />
+            <Route path="/idea-pad/write" element={<MemoWrite />} />
+            <Route path="/idea-pad/detail/:id" element={<MemoDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
