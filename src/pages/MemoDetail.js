@@ -169,13 +169,13 @@ function MemoDetail(props) {
 
       dispatch(modify(newMemo));
       handleClearForm();
-      navigate('/', { replace: true });
+      navigate('/idea-pad', { replace: true });
     }
   }, [dispatch, form, handleClearForm, memoDetail, mode, navigate]);
 
   const handleRemove = useCallback(() => {
     dispatch(remove(memoDetail.id));
-    navigate('/', { replace: true });
+    navigate('/idea-pad', { replace: true });
   }, [dispatch, memoDetail.id, navigate]);
 
   const handleOpenModal = useCallback(() => {

@@ -146,7 +146,7 @@ function MemoWrite(props) {
 
       dispatch(write(newMemo));
       handleClearForm();
-      navigate('/', { replace: true });
+      navigate('/idea-pad', { replace: true });
     }
   }, [dispatch, mode, form, handleClearForm, navigate]);
 

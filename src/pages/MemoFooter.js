@@ -39,7 +39,7 @@ function MemoFooter({ count }) {
     <MemoFooterWrapper>
       <span>{count} 개의 메모</span>
       {mode === 'LIST' && 
-        <Link to="/write">
+        <Link to="/idea-pad/write">
           <StyledWriteIcon />
         </Link>
       }

@@ -41,7 +41,7 @@ function MemoHeader(props) {
   }, [dispatch]);
 
   const handleCancelMemo = useCallback(() => {
-    navigate('/', { replace: true });
+    navigate('/idea-pad', { replace: true });
   }, [navigate]);
 
   return (
