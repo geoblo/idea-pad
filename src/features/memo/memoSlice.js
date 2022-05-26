@@ -53,7 +53,7 @@ export const { write, modify, fixed, remove, changeMode, getMemo, getMemoById } 
 
 export const selectAll = state => state.memo;
 export const selectMode = state => state.memo.mode;
-export const selectMemoCount = state => state.memo.memoList.length;
+export const selectMemoCount = state => state.memo.memoList ? state.memo.memoList.length : 0;
 export const selectMemoList = state => state.memo.memoList;
 export const selectMemoDetail = state => state.memo.memoDetail;
 
