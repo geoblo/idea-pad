@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/idea-pad/static/css/main.efbe7d6a.css",
-    "main.js": "/idea-pad/static/js/main.19664c88.js",
+    "main.js": "/idea-pad/static/js/main.f20dd21d.js",
     "index.html": "/idea-pad/index.html",
     "main.efbe7d6a.css.map": "/idea-pad/static/css/main.efbe7d6a.css.map",
-    "main.19664c88.js.map": "/idea-pad/static/js/main.19664c88.js.map"
+    "main.f20dd21d.js.map": "/idea-pad/static/js/main.f20dd21d.js.map"
   },
   "entrypoints": [
     "static/css/main.efbe7d6a.css",
-    "static/js/main.19664c88.js"
+    "static/js/main.f20dd21d.js"
   ]
 }
