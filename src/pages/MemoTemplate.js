@@ -35,7 +35,7 @@ function MemoTemplate() {
     <CenterBox>
       <MemoTemplateWrapper>
         <MemoHeader />
-        {<Outlet />}
+        <Outlet />
         <MemoFooter count={memoCnt} />
       </MemoTemplateWrapper>
     </CenterBox>

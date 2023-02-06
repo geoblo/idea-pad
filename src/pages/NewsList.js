@@ -37,7 +37,7 @@ const SearchInput = styled.input`
   color: white;
   padding: 0.5rem;
 
-  ::placeholder {
+  &::placeholder {
     color: white;
     opacity: 1;
   }

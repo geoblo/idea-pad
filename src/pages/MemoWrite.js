@@ -31,7 +31,7 @@ const TitleInput = styled.input`
   color: white;
   padding: 0.5rem;
 
-  ::placeholder {
+  &::placeholder {
     color: white;
     opacity: 1;
   }
@@ -53,7 +53,7 @@ const DescTextarea = styled.textarea`
   margin-bottom: 1rem;
   padding: 0.5rem;
 
-  ::placeholder {
+  &::placeholder {
     color: white;
     opacity: 1;
   }
